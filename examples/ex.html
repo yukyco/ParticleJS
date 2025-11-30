@@ -1,0 +1,135 @@
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>ParticleJS - YUKYCO</title>
+
+  <!-- CreateJSのライブラリー読み込み -->
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+
+  <!-- パーティクルシステムのライブラリー読み込み -->
+  <script src="../libs/particlejs.min.js"></script>
+  <!-- JS -->
+  <script>
+    var particleSystem = null;
+    var stage = null;
+
+    //  ウィンドウのロードが終わり次第、初期化コードを呼び出す。
+    window.addEventListener("load", function () {
+      // Stageオブジェクトを作成します。表示リストのルートになります。
+      stage = new createjs.Stage("myCanvas");
+
+      // パーティクルシステム作成します。
+      particleSystem = new particlejs.ParticleSystem();
+
+      // パーティクルシステムの描画コンテナーを表示リストに登録します。
+      stage.addChild(particleSystem.container);
+
+      // Particle Develop( http://ics-web.jp/projects/particle-develop/ ) から書きだしたパーティクルの設定を読み込む
+      particleSystem.importFromJson(
+        // パラメーターJSONのコピー＆ペースト ここから--
+{
+    "bgColor": "#00000",
+    "width": 1000,
+    "height": 460,
+    "emitFrequency": "100",
+    "startX": 508,
+    "startXVariance": 1024,
+    "startY": 320,
+    "startYVariance": 433,
+    "initialDirection": "0",
+    "initialDirectionVariance": "360",
+    "initialSpeed": 0.3,
+    "initialSpeedVariance": 12.4,
+    "friction": "0.038",
+    "accelerationSpeed": "0.13",
+    "accelerationDirection": "273.3",
+    "startScale": "0.76",
+    "startScaleVariance": "1",
+    "finishScale": "0",
+    "finishScaleVariance": "0",
+    "lifeSpan": "50",
+    "lifeSpanVariance": "196",
+    "startAlpha": "1",
+    "startAlphaVariance": "0",
+    "finishAlpha": "0.35",
+    "finishAlphaVariance": 0.5,
+    "shapeIdList": [
+        "blur_circle",
+        "circle",
+        "kirakira2",
+        "kirakira",
+        "heart"
+    ],
+    "startColor": {
+        "hue": 341,
+        "hueVariance": "55",
+        "saturation": 88,
+        "saturationVariance": "78",
+        "luminance": "83",
+        "luminanceVariance": "16"
+    },
+    "blendMode": true,
+    "alphaCurveType": "1",
+    "VERSION": "1.0.0"
+　　} 
+   );
+
+
+      // フレームレートの設定
+      createjs.Ticker.framerate = 60;
+      // requestAnimationFrameに従った呼び出し
+      createjs.Ticker.timingMode = createjs.Ticker.RAF;
+      // 定期的に呼ばれる関数を登録
+      createjs.Ticker.addEventListener("tick", handleTick);
+    });
+
+    function handleTick() {
+      // 時間経過によって色相の基準値を変化させる
+      particleSystem.startColor.hue += 2;
+      if (particleSystem.startColor.hue >= 360) {
+        particleSystem.startColor.hue = 0;
+      }
+
+      // パーティクルの発生・更新
+      particleSystem.update();
+
+      // 描画を更新する
+      stage.update();
+    }
+  </script>
+
+  <!-- CSS -->
+  <style>
+    canvas {
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+  body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0.8;
+      background-image: url(../img/bk.png);
+      background-repeat: no-repeat;
+      width:400px;                                      
+      height:400px;   
+      background-position: center;
+      background-size: 300px;
+      margin-top: 250px;
+      margin-left: 550px;   
+　　-webkit-background-size: cover;
+    　-moz-background-size: cover;
+    　-o-background-size: cover;
+    　background-size: cover;
+    }  
+  </style>
+</head>
+<body>
+<canvas width="960" height="540" id="myCanvas"></canvas>
+</body>
+</html>

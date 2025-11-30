@@ -1,0 +1,51 @@
+<html>
+<head>
+  <meta charset="UTF-8"/>
+  <title>ParticleJS - SNOW</title>
+ <script type="text/javascript" src="https://artboxstandard.info/adminartist/News01/news/admin/js/snowflake.min.js"></script>
+
+  <!-- CreateJSのライブラリー読み込み -->
+  <script src="https://code.createjs.com/1.0.0/createjs.min.js"></script>
+
+  <!-- パーティクルシステムのライブラリー読み込み -->
+  <script src="../libs/particlejs.min.js"></script>
+
+  <!-- CSS -->
+  <style>
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url(../img/yukyco4.png);
+      overflow: hidden;
+    }
+  
+    /*body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ff6347;
+      overflow: hidden;
+    }*/
+  </style>
+</head>
+<body>
+ 
+
+<canvas width="960" height="540" id="myCanvas"></canvas>
+
+
+    <script>
+          const snowflake = new SnowflakeJs(25,250,5000,5,25);
+          snowflake.init();
+    </script>
+</body>
+</html>
